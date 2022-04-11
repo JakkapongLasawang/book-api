@@ -12,7 +12,7 @@ class BookSerializer(serializers.ModelSerializer):
     # django rest framework method serializer
     # it read only --not get input
     new_number_of_pages = serializers.SerializerMethodField()
-    foo = serializers.SerializerMethodField()
+    food = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
@@ -28,9 +28,9 @@ class BookSerializer(serializers.ModelSerializer):
         # custom error messages
         self.fields['title'].error_messages['required'] = 'My custom required msg'
 
-    def get_foo(self, obj):
+    def get_food(self, obj):
         # print(obj.__dict__)
-        return "Foo id is read only"
+        return "Food id is read only"
 
     def get_new_number_of_pages(self, obj):
         return obj.number_of_pages*25
