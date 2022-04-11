@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import BookSerializer
+from .serializers import BookSerializer,ReadBookSerializer
 from .models import Book
 
 
@@ -31,7 +31,7 @@ class FindOne(APIView):
             return Response({'error': 'Book not found'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = BookSerializer(book)
+        serializer = ReadBookSerializer(book)
         return Response(serializer.data)
 
     def put(self, request, book_id):
