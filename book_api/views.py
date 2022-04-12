@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import BookSerializer,ReadBookSerializer
+from .serializers import BookSerializer, ReadBookSerializer, CustomBookSerializer
 from .models import Book
 
 
@@ -12,9 +12,16 @@ class BookList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+
+        test_s = CustomBookSerializer(data=request.data)
+        if not test_s.is_valid():
+            return Response(test_s.errors)
+
+        # book = test_s.data
+        # print(book['title'])
+
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
-            print(serializer.data)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)

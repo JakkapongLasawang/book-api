@@ -10,10 +10,7 @@ class Book(models.Model):
     author = models.CharField(max_length=128)
     quantity = models.IntegerField()
     published = models.DateField(auto_now_add=True)
-    
-    @property
-    def my_field(self):
-        return None
+
 
     def __str__(self):
         return self.title

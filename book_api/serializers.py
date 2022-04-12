@@ -3,6 +3,14 @@ from rest_framework import serializers
 from .models import Book
 
 
+class CustomBookSerializer(serializers.Serializer):
+    custom_field = serializers.CharField()
+    title = serializers.CharField()
+    number_of_pages = serializers.IntegerField()
+    author = serializers.CharField()
+    quantity = serializers.IntegerField()
+
+
 class BookSerializer(serializers.ModelSerializer):
 
     # change field name
@@ -14,11 +22,7 @@ class BookSerializer(serializers.ModelSerializer):
     new_number_of_pages = serializers.SerializerMethodField()
     food = serializers.SerializerMethodField()
 
-    color_channel = serializers.ChoiceField(
-        choices=['red', 'green', 'blue'],
-        style={'base_template': 'radio.html'},
-        source='my_field'
-    )
+    # custom_field = serializers.CharField(write_only=True)
 
     class Meta:
         model = Book
@@ -44,7 +48,8 @@ class BookSerializer(serializers.ModelSerializer):
         except:
             return None
 
-
+    # def get_custom_field(self, obj):
+    #     return None
 
 
 class ReadBookSerializer(serializers.ModelSerializer):
