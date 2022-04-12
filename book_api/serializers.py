@@ -39,13 +39,12 @@ class BookSerializer(serializers.ModelSerializer):
         return "Food id is read only"
 
     def get_new_number_of_pages(self, obj):
-        return obj.number_of_pages*25
+        try:
+            return obj.number_of_pages*25
+        except:
+            return None
 
 
-# property
-
-    def get_my_field(self):
-        return None
 
 
 class ReadBookSerializer(serializers.ModelSerializer):
