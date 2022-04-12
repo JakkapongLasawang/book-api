@@ -14,6 +14,12 @@ class BookSerializer(serializers.ModelSerializer):
     new_number_of_pages = serializers.SerializerMethodField()
     food = serializers.SerializerMethodField()
 
+    color_channel = serializers.ChoiceField(
+        choices=['red', 'green', 'blue'],
+        style={'base_template': 'radio.html'},
+        source='my_field'
+    )
+
     class Meta:
         model = Book
 
@@ -34,6 +40,12 @@ class BookSerializer(serializers.ModelSerializer):
 
     def get_new_number_of_pages(self, obj):
         return obj.number_of_pages*25
+
+
+# property
+
+    def get_my_field(self):
+        return None
 
 
 class ReadBookSerializer(serializers.ModelSerializer):
